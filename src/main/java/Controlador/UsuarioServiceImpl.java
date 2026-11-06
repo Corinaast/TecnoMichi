@@ -1,4 +1,4 @@
-package ControladorTest;
+package Controlador;
 
 import Modelo.IUsuarioRepository;
 import Modelo.Usuario;

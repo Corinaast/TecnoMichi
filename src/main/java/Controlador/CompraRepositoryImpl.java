@@ -1,4 +1,4 @@
-package ControladorTest;
+package Controlador;
 
 import Controlador.MongoDBConnection;
 import Modelo.Compra;

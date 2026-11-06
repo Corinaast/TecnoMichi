@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ControladorTest;
+package Controlador;
 import Controlador.MongoDBConnection;
 import Modelo.Celular;
 import Modelo.ICelularRepository;
@@ -22,7 +22,7 @@ import java.util.List;
  * Aplica el Principio de Inversión de Dependencias (DIP) al depender de la abstracción ICelularRepository
  * y usar MongoDBConnection para la base de datos.
  */
-public abstract class CelularRepositoryImpl implements ICelularRepository {
+public class CelularRepositoryImpl implements ICelularRepository {
 
     private final MongoCollection<Document> productosCollection; // Asumiendo que los celulares están en la colección "productos"
 
@@ -58,6 +58,32 @@ public abstract class CelularRepositoryImpl implements ICelularRepository {
             }
         } catch (Exception e) {
             System.err.println("Error al buscar celular por ID: " + e.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public List<Celular> findAll() {
+        List<Celular> celulares = new ArrayList<>();
+        try {
+            for (Document doc : productosCollection.find()) {
+                celulares.add(Celular.fromDocument(doc));
+            }
+        } catch (Exception e) {
+            System.err.println("Error al listar celulares: " + e.getMessage());
+        }
+        return celulares;
+    }
+
+    @Override
+    public Celular findByNombre(String nombre) {
+        try {
+            Document doc = productosCollection.find(Filters.eq("nombre", nombre)).first();
+            if (doc != null) {
+                return Celular.fromDocument(doc);
+            }
+        } catch (Exception e) {
+            System.err.println("Error al buscar celular por nombre: " + e.getMessage());
         }
         return null;
     }

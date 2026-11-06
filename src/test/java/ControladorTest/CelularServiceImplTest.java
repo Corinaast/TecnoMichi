@@ -1,5 +1,6 @@
 package ControladorTest;
 
+import Controlador.CelularServiceImpl;
 import Modelo.Celular;
 import Modelo.ICelularRepository;
 import java.util.Arrays;

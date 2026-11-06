@@ -1,5 +1,6 @@
 package ControladorTest;
 
+import Controlador.UsuarioServiceImpl;
 import Modelo.IUsuarioRepository;
 import Modelo.Usuario;
 import org.junit.jupiter.api.BeforeEach;

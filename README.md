@@ -29,11 +29,10 @@ El proyecto está separado en cuatro capas y depende de **interfaces**, no de im
 |---|---|
 | `Main` | Punto de entrada (`Main.P2Actividad`): arranca la vista de login |
 | `Vista` | Formularios Swing (`Inicio`, `Registro`, `Celulares`, `VistaCompra`, `VistaUsuario`) |
-| `Controlador` | Casos de uso y coordinación entre vista y persistencia |
-| `Modelo` | Entidades (`Celular`, `Compra`, `Usuario`) e interfaces `IRepository`, `I*Service` |
-| `Modelo` / `Controlador` | Implementaciones de repositorios y conexión a MongoDB |
+| `Controlador` | Controladores de vista, servicios de caso de uso (`*ServiceImpl`) y repositorios MongoDB (`*RepositoryImpl`) |
+| `Modelo` | Entidades (`Celular`, `Compra`, `Usuario`) e interfaces `IRepository`, `I*Service`, `I*Repository` |
 
-Las interfaces `ICelularRepository`, `ICompraRepository`, `IUsuarioRepository` y sus servicios permiten sustituir la persistencia sin tocar la lógica, y es lo que hace testeable la capa de servicios.
+Las interfaces `ICelularRepository`, `ICompraRepository`, `IUsuarioRepository` y los servicios que dependen de ellas permiten sustituir la persistencia sin tocar la lógica, y es lo que hace testeable la capa de servicios con Mockito.
 
 ## Pruebas
 
@@ -79,7 +78,7 @@ TecnoMichi/
     ├── main/
     │   ├── java/
     │   │   ├── Main/           # clase ejecutable
-    │   │   ├── Controlador/    # controladores + conexión MongoDB
+    │   │   ├── Controlador/    # controladores, servicios y repositorios MongoDB
     │   │   ├── Modelo/         # entidades e interfaces
     │   │   └── Vista/          # formularios Swing (.java + .form)
     │   └── resources/          # imágenes del catálogo e iconos
